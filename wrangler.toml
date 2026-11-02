@@ -1,0 +1,6 @@
+name = "agent-fuse"
+main = "src/index.ts"
+compatibility_date = "2026-11-01"
+
+[vars]
+UPSTASH_REDIS_REST_URL = "https://deciding-marten-123015.upstash.io"

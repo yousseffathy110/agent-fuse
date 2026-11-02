@@ -1,0 +1,35 @@
+{
+  "name": "@youseffathy1/agentfuse",
+  "version": "1.0.0",
+  "description": "Production edge proxy and circuit breaker client for autonomous AI agents.",
+  "main": "dist/agentfuse.js",
+  "module": "dist/agentfuse.mjs",
+  "types": "dist/agentfuse.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/agentfuse.d.ts",
+      "import": "./dist/agentfuse.mjs",
+      "require": "./dist/agentfuse.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup agentfuse.ts --format cjs,esm --dts --clean"
+  },
+  "keywords": [
+    "ai",
+    "agents",
+    "proxy",
+    "idempotency",
+    "circuit-breaker",
+    "langchain"
+  ],
+  "author": "AgentFuse",
+  "license": "MIT",
+  "devDependencies": {
+    "tsup": "^8.3.5",
+    "typescript": "^5.0.0"
+  }
+}

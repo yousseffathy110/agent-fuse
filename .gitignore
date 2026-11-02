@@ -1,0 +1,13 @@
+# Dependencies
+node_modules/
+sdk/node_modules/
+
+# Cloudflare & Secrets
+.wrangler/
+.dev.vars
+.env*
+
+# Build artifacts & logs
+dist/
+*.tgz
+*.log
