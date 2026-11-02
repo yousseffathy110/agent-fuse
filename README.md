@@ -61,6 +61,71 @@ try {
 }
 ```
 
+### Framework adapters
+
+Install the framework packages you use in your application. AgentFuse keeps
+`ai` and `@langchain/core` as optional peer dependencies, so projects that do
+not use them do not install either package.
+
+#### Vercel AI SDK (`ai`)
+
+Wrap any tool definition without altering its schema or parameters:
+
+```ts
+import { wrapVercelAITool, AgentFuse } from "@youseffathy1/agentfuse";
+import { tool } from "ai";
+import { z } from "zod";
+
+const fuse = new AgentFuse({
+  gatewayUrl: "https://agent-fuse.agentfuse.workers.dev",
+  apiKey: process.env.AGENTFUSE_API_KEY!,
+  agentId: "customer_search_agent",
+});
+
+export const searchCustomer = wrapVercelAITool(
+  tool({
+    description: "Look up customer records by account ID",
+    parameters: z.object({ accountId: z.string() }),
+    execute: async ({ accountId }) => {
+      // This local handler is bypassed; AgentFuse forwards to targetUrl.
+      return { accountId, status: "active" };
+    },
+  }),
+  {
+    fuse,
+    targetUrl: "https://api.example.com/customers/query",
+  },
+);
+```
+
+#### LangChain / LangGraph
+
+Wrap structured tools to intercept `_call` and `invoke`:
+
+```ts
+import { wrapLangChainTool, AgentFuse } from "@youseffathy1/agentfuse";
+import { DynamicStructuredTool } from "@langchain/core/tools";
+import { z } from "zod";
+
+const fuse = new AgentFuse({
+  gatewayUrl: "https://agent-fuse.agentfuse.workers.dev",
+  apiKey: process.env.AGENTFUSE_API_KEY!,
+  agentId: "database_agent",
+});
+
+const rawTool = new DynamicStructuredTool({
+  name: "query_database",
+  description: "Execute read-only SQL queries",
+  schema: z.object({ query: z.string() }),
+  func: async ({ query }) => `Query executed: ${query}`,
+});
+
+export const safeDbTool = wrapLangChainTool(rawTool, {
+  fuse,
+  targetUrl: "https://api.example.com/db/query",
+});
+```
+
 ## Self-hosting the edge worker
 
 ### 1. Clone and install
