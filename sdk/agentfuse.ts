@@ -54,3 +54,8 @@ export class AgentFuse {
     return { data, cached };
   }
 }
+
+export { wrapLangChainTool } from "./adapters/langchain";
+export type { LangChainToolLike, LangChainToolOptions } from "./adapters/langchain";
+export { wrapVercelAITool } from "./adapters/vercel";
+export type { VercelAIToolDefinition, VercelAIToolOptions } from "./adapters/vercel";

@@ -2,11 +2,15 @@ import { AgentFuse } from "./sdk/dist/agentfuse.mjs";
 
 const fuse = new AgentFuse({
   gatewayUrl: "https://agent-fuse.agentfuse.workers.dev",
-  apiKey: "af_live_9f83b2a1c0d4e5",
+  apiKey: process.env.AGENTFUSE_API_KEY || "",
   agentId: `burst_bot_${Date.now()}`,
 });
 
 async function main() {
+  if (!process.env.AGENTFUSE_API_KEY) {
+    throw new Error("Set AGENTFUSE_API_KEY before running this live gateway test.");
+  }
+
   console.log("Firing 20 concurrent requests against compiled SDK...\n");
   const requests = Array.from({ length: 20 }, (_, i) => i + 1);
 
