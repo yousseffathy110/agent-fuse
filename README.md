@@ -1,6 +1,6 @@
 # AgentFuse ⚡
 
-[![npm version](https://img.shields.io/npm/v/@youseffathy1/agentfuse.svg?color=6366f1)](https://www.npmjs.com/package/@youseffathy1/agentfuse)
+[![npm version](https://img.shields.io/npm/v/@agentfuse-ai/core.svg?color=6366f1)](https://www.npmjs.com/package/@agentfuse-ai/core)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-Ready-3178C6.svg)](https://www.typescriptlang.org/)
 
@@ -34,11 +34,11 @@
 Install the official client package:
 
 ```bash
-npm install @youseffathy1/agentfuse
+npm install @agentfuse-ai/core
 ```
 
 ```ts
-import { AgentFuse } from "@youseffathy1/agentfuse";
+import { AgentFuse } from "@agentfuse-ai/core";
 
 const fuse = new AgentFuse({
   gatewayUrl: "https://agent-fuse.agentfuse.workers.dev",
@@ -72,7 +72,7 @@ not use them do not install either package.
 Wrap any tool definition without altering its schema or parameters:
 
 ```ts
-import { wrapVercelAITool, AgentFuse } from "@youseffathy1/agentfuse";
+import { wrapVercelAITool, AgentFuse } from "@agentfuse-ai/core";
 import { tool } from "ai";
 import { z } from "zod";
 
@@ -103,7 +103,7 @@ export const searchCustomer = wrapVercelAITool(
 Wrap structured tools to intercept `_call` and `invoke`:
 
 ```ts
-import { wrapLangChainTool, AgentFuse } from "@youseffathy1/agentfuse";
+import { wrapLangChainTool, AgentFuse } from "@agentfuse-ai/core";
 import { DynamicStructuredTool } from "@langchain/core/tools";
 import { z } from "zod";
 
