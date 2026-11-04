@@ -1,6 +1,6 @@
 {
   "name": "@agentfuse-ai/core",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Production edge proxy and circuit breaker client for autonomous AI agents.",
   "main": "dist/agentfuse.js",
   "module": "dist/agentfuse.mjs",
